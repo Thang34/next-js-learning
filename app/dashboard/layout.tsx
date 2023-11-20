@@ -1,5 +1,9 @@
-import Link from "next/link"
 
+import Link from "next/link"
+import Loading from "./loading"
+import { Suspense } from "react"
+import ErrorBoundary from "next/dist/client/components/error-boundary"
+import Error from "./error"
 export default function DashboardLayout({
   children, // will be a page or nested layout
 }: {
@@ -29,9 +33,14 @@ export default function DashboardLayout({
           <div className="text-center">Side bar item 4</div>
           <div className="text-center">Side bar item 5</div>
         </div>
+        {/* <ErrorBoundary fallback={<Error />}>
+        </ErrorBoundary> */}
         <div className="w-full p-3">
-          {children}
+          <Suspense fallback={<Loading />}>
+            {children}
+          </Suspense>
         </div>
+
       </div>
     </section>
   )
